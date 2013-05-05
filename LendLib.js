@@ -7,12 +7,12 @@ function adminUser(userId) {
 
 lists.allow({
     insert: function (userId, doc) {
-        return adminUser(userId);
+        return adminUser(userId) || (userId && doc.owner === userId);
     },
     update: function (userId, doc, fields, modifier) {
-        return adminUser(userId);
+        return adminUser(userId) || (userId && doc.owner === userId);
     },
     remove: function (userId, doc) {
-        return adminUser(userId);
+        return adminUser(userId) || (userId && doc.owner === userId);
     }
 });

@@ -22,7 +22,7 @@ Template.categories.events({
         if (e.which === 13) {
             var catVal = String(e.target.value || "");
             if (catVal) {
-                lists.insert({Category: catVal});
+                lists.insert({Category: catVal, owner: Meteor.userId()});
                 Session.set('adding_category', false);
             }
         }
