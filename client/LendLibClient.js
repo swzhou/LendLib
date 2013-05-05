@@ -105,6 +105,10 @@ Template.list.events({
     }
 });
 
+Accounts.ui.config({
+   passwordSignupFields: "USERNAME_AND_OPTIONAL_EMAIL"
+});
+
 function focusText(i, val) {
     i.focus();
     i.value = val ? val : "";
