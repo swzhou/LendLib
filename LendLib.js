@@ -1,6 +1,11 @@
 lists = new Meteor.Collection("Lists");
 
 if (Meteor.isClient) {
+    Meteor.subscribe("Categories");
+    Meteor.autosubscribe(function(){
+       Meteor.subscribe("listdetails", Session.get('current_list'));
+    });
+
     Template.categories.lists = function () {
         return lists.find({}, {sort: {Category: 1}});
     };
@@ -139,5 +144,11 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
     Meteor.startup(function () {
         // code to run on server at startup
+    });
+    Meteor.publish("Categories", function () {
+        return lists.find({}, {fields: {Category: 1}});
+    });
+    Meteor.publish("listdetails", function (category_id) {
+        return lists.find({_id: category_id});
     });
 }
